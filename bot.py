@@ -78,14 +78,14 @@ async def cmd_start(message: Message):
 @dp.callback_query(F.data == "Попробовать функции пользователя")
 async def admin_to_user(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(text="Чтобы вернуться к админ-меню нажмите на кнопку снизу", reply_markup=back_reply_kb())
-    await user_start(message=callback.message, state=state)
+    await user_start(message=callback.message)
 
 async def user_start(message):
     tg_id = str(message.from_user.id)
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
     await create_user(tg_id, first_name, last_name)
-    await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
+    await message.answer_photo(photo=hello1_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):
@@ -401,6 +401,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
     await state.update_data(fifth_question=F.data)
     data = await state.get_data()
+    print(data)
     await state.clear()
 
     if ((str(data['first_question']) == '60') + (data['second_question'] == 'Хелфи') + (str(data['third_question']) == '5') + (data['fourth_question'] == 'применения пьезоэлектриков') + (str(data['fifth_question']) == '0')) >= 3:
