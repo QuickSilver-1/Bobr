@@ -1,7 +1,7 @@
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram import Bot, Dispatcher, F
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command, StateFilter
 from aiogram.types import Message, CallbackQuery
 from keyboards import *
 from media import *
@@ -129,13 +129,6 @@ async def cancel(callback: CallbackQuery, state: FSMContext):
     await bot.delete_message(chat_id = chat, 
                              message_id = mes)
 
-
-
-
-
-
-
-
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
     await callback.message.edit_caption(
@@ -163,3 +156,83 @@ async def process_stage_three(callback: CallbackQuery):
                 'egypt2_text'
         )
     )
+
+# химикаты
+@dp.callback_query(F.data == 'egypt2_text')
+async def process_stage_four(callback: CallbackQuery):
+    await callback.answer('')
+
+    await callback.message.answer_photo(
+        photo=chemicals_photo,
+        caption=chemicals1_text,
+        reply_markup=inline_kb_builder('chemicals1_text')
+    )
+
+@dp.callback_query(F.data == 'chemicals1_text')
+async def process_stage_five(callback: CallbackQuery):
+    await callback.message.edit_caption(
+        caption=chemicals2_text,
+        reply_markup=inline_kb_builder('chemicals2_text')
+    )
+
+# новая паста с добавлением пьезоэлектриков
+@dp.callback_query(F.data == 'chemicals1_text')
+async def process_stage_four(callback: CallbackQuery):
+    await callback.answer('')
+
+    await callback.message.answer_photo(
+        photo=piezoelectricity_photo,
+        caption=piezo_electricity1_text,
+        reply_markup=inline_kb_builder('piezo_electricity1_text')
+    )
+
+@dp.callback_query(F.data == 'piezo_electricity1_text')
+async def process_stage_five(callback: CallbackQuery):
+    await callback.message.edit_caption(
+        caption=piezo_electricity2_text,
+        reply_markup=inline_kb_builder('piezo_electricity2_text')
+    )
+
+
+@dp.callback_query(F.data == 'piezo_electricity2_text')
+async def process_stage_four(callback: CallbackQuery):
+    await callback.answer('')
+
+    await callback.message.answer_photo(
+        photo=community_photo,
+        caption=community1_text,
+        reply_markup=inline_kb_builder('community1_text')
+    )
+
+@dp.callback_query(F.data == 'community1_text')
+async def process_stage_five(callback: CallbackQuery):
+    await callback.message.edit_caption(
+        caption=community2_text,
+        reply_markup=inline_kb_builder('community2_text')
+    )
+
+class Quiz(StatesGroup):
+    name = State()
+    first_question = State()
+    second_question = State()
+    third_question = State()
+    fourth_question = State()
+    fifth_question = State()
+    
+############################################################33 ШАБЛОН ДЛЯ ДВУХ СЛАЙДОВ
+# @dp.callback_query(F.data == '')
+# async def process_stage_four(callback: CallbackQuery):
+#     await callback.answer('')
+
+#     await callback.message.answer_photo(
+#         photo=chemicals_photo,
+#         caption=,
+#         reply_markup=inline_kb_builder('')
+#     )
+
+# @dp.callback_query(F.data == '')
+# async def process_stage_five(callback: CallbackQuery):
+#     await callback.message.edit_caption(
+#         caption=,
+#         reply_markup=inline_kb_builder('')
+#     )
