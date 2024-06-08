@@ -71,7 +71,7 @@ async def cmd_start(message: Message, state: FSMContext):
         first_name = message.from_user.first_name
         last_name = message.from_user.last_name
         await create_user(tg_id, first_name, last_name)
-        delete_id = await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder(F.data == 'hello1_text'))
+        delete_id = await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
         await state.set_state(Delete.delete_msg_id)
         await state.update_data(msg_id=delete_id.message_id)
         
