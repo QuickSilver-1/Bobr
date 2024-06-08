@@ -2,7 +2,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command, StateFilter
-from aiogram.types import InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InputMediaPhoto
 from aiogram.types import Message, CallbackQuery
 from keyboards import *
 from media import *
@@ -219,7 +219,10 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
-    await callback.message.edit_caption(
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=hello2_photo
+        ),
         caption=hello2_text,
         reply_markup=inline_kb_builder(
             'hello2_text'
@@ -231,7 +234,7 @@ async def process_stage_two(callback: Message):
     await callback.answer('')
 
     await callback.message.answer_photo(
-            photo=egypt_photo,
+            photo=egypt1_photo,
             caption=egypt1_text,
             reply_markup=inline_kb_builder('egypt1_text')
         )
@@ -335,7 +338,7 @@ async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
         text=decline_quiz_text, 
         reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
             ]
         ])
     )
@@ -343,6 +346,8 @@ async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
 # начало квиза
 @dp.callback_query(F.data == 'START_QUIZ_ACTION', StateFilter(default_state))
 async def process_start_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     await callback.message.answer(
         text=first_question,
         reply_markup=quiz_question_keyboard('first_question')
@@ -365,7 +370,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 @dp.callback_query(StateFilter(Quiz.second_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
     await state.update_data(second_question=F.data)
-    await state.set_state(Quiz.second_question)
+    await state.set_state(Quiz.third_question)
 
     await callback.message.edit_text(
         text=third_question,
@@ -378,23 +383,33 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
     await state.set_state(Quiz.fourth_question)
 
     await callback.message.edit_text(
-        text=third_question,
+        text=fourth_question,
         reply_markup=quiz_question_keyboard('fourth_question')
     )
 
 @dp.callback_query(StateFilter(Quiz.fourth_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
+    await state.update_data(fourth_question=F.data)
+    await state.set_state(Quiz.fifth_question)
+
+    await callback.message.edit_text(
+        text=fifth_question,
+        reply_markup=quiz_question_keyboard('fifth_question')
+    )
+
+@dp.callback_query(StateFilter(Quiz.fifth_question))
+async def process_second_question(callback: CallbackQuery, state: FSMContext):
     await state.update_data(fifth_question=F.data)
     data = await state.get_data()
+    await state.clear()
 
-    if ((str(data['first_question']) == '60') + (data['second_question'] == 'Хелфи') + (str(data['third_question']) == '5') +\
-          (data['fourth_question'] == 'применения пьезоэлектриков') + (str(data['fifth_question']) == '0')) >= 3:
+    if ((str(data['first_question']) == '60') + (data['second_question'] == 'Хелфи') + (str(data['third_question']) == '5') + (data['fourth_question'] == 'применения пьезоэлектриков') + (str(data['fifth_question']) == '0')) >= 3:
         await callback.message.answer_photo(
             photo=winner_photo,
             caption=quiz_winner_text,
             reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
             ]
         ])
         )
@@ -404,7 +419,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
             text=failed_quiz,
             reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
             ]
         ])
         )

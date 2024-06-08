@@ -80,8 +80,8 @@ def quiz_question_keyboard(question_number: str) -> InlineKeyboardMarkup:
 
     for button_label in questions[question_number]:
         builder.button(
-            text=button_label,
-            callback_data=button_label
+            text=str(button_label),
+            callback_data=str(button_label)
         )
     
     return builder.as_markup(resize_keyboard=True)
