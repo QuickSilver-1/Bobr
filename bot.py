@@ -136,32 +136,30 @@ async def cancel(callback: CallbackQuery, state: FSMContext):
 
 
 
-@dp.callback_query(F.data == "hello")
-async def hello(callback: CallbackQuery, state: FSMContext):
+@dp.callback_query(F.data == 'hello1_text')
+async def process_stage_one(callback: CallbackQuery):
+    await callback.message.edit_caption(
+        caption=hello2_text,
+        reply_markup=inline_kb_builder(
+            'hello2_text'
+        )
+    )
 
-    data = await state.get_data()
-    await callback.message.bot.delete_message(chat_id=callback.message.chat.id, message_id=data.get("msg_id"))
-    await callback.message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=next_page("story_first1"))
+@dp.callback_query(F.data == 'hello2_text')
+async def process_stage_two(callback: Message):
+    await callback.answer('')
 
-@dp.callback_query(F.data == "story_first1")
-async def egypt1(callback: CallbackQuery, state: FSMContext):
-
-    delete_id = await callback.message.answer_photo(photo=egypt_photo, caption=egypt1_text, reply_markup=skip_page("story_first2"))
-    await state.set_state(Delete.delete_msg_id)
-    await state.update_data(msg_id=delete_id.message_id)
-
-@dp.callback_query(F.data == "story_first2")
-async def egypt2(callback: CallbackQuery, state: FSMContext):
-
-    data = await state.get_data()
-    await callback.message.bot.delete_message(chat_id=callback.message.chat.id, message_id=data.get("msg_id"))
-    await callback.message.answer_photo(photo=egypt_photo, caption=egypt2_text, reply_markup=next_page("story_second1"))
-
-@dp.callback_query(F.data == "story_second1")
-async def lab1(callback: CallbackQuery, state: FSMContext):
-
-    delete_id = await callback.message.answer_photo(photo=egypt_photo, caption=lab1_text, reply_markup=skip_page("story_socond2"))
-    await state.set_state(Delete.delete_msg_id)
-    await state.update_data(msg_id=delete_id.message_id)
-
-
+    await callback.message.answer_photo(
+            photo=egypt_photo,
+            caption=egypt1_text,
+            reply_markup=inline_kb_builder('egypt1_text')
+        )
+    
+@dp.callback_query(F.data == 'egypt1_text')
+async def process_stage_three(callback: CallbackQuery):
+    await callback.message.edit_caption(
+        caption=egypt2_text,
+        reply_markup=inline_kb_builder(
+                'egypt2_text'
+        )
+    )
