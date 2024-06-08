@@ -9,7 +9,11 @@ from media import *
 from config import config_1
 from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
+<<<<<<< Updated upstream
 from re import match
+=======
+from re import *
+>>>>>>> Stashed changes
 
 
 dp = Dispatcher()
