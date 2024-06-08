@@ -1,11 +1,13 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 from typing import Optional
 from aiogram.filters.callback_data import CallbackData
 from datetime import datetime
 from media import *
 from aiogram.types import WebAppInfo
 from psycopg2 import connect
+from media import *
+
 
 def skip_page(page):
     builder = InlineKeyboardBuilder()
@@ -26,3 +28,23 @@ def next_page(page):
 
     builder.adjust(1)
     return builder.as_markup()
+
+def reply_kb_builder(buttons: list) -> ReplyKeyboardMarkup:
+    builder = ReplyKeyboardBuilder()
+    for button in buttons:
+        builder.button(
+            text=button,
+        )
+
+    builder.adjust(1)
+    return builder.as_markup(resize_keyboard=True)
+
+def inline_kb_builder(callback: str) -> InlineKeyboardMarkup:
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text=callback_keys[callback],
+        callback_data=callback
+    )
+
+    return builder.as_markup(resize_keyboard=True)
