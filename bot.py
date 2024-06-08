@@ -230,8 +230,11 @@ async def process_stage_two(callback: Message):
     
 @dp.callback_query(F.data == 'egypt1_text')
 async def process_stage_three(callback: CallbackQuery):
-    await callback.message.edit_caption(
-        caption=egypt2_text,
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=egypt2_photo,
+            caption=egypt2_text,
+        ),
         reply_markup=inline_kb_builder(
                 'egypt2_text'
         )
@@ -243,15 +246,18 @@ async def process_stage_four(callback: CallbackQuery):
     await callback.answer('')
 
     await callback.message.answer_photo(
-        photo=chemicals_photo,
+        photo=chemicals1_photo,
         caption=chemicals1_text,
         reply_markup=inline_kb_builder('chemicals1_text')
     )
 
 @dp.callback_query(F.data == 'chemicals1_text')
 async def process_stage_five(callback: CallbackQuery):
-    await callback.message.edit_caption(
-        caption=chemicals2_text,
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=chemicals1_photo,
+            caption=chemicals2_text,
+        ),
         reply_markup=inline_kb_builder('chemicals2_text')
     )
 
@@ -261,15 +267,18 @@ async def process_stage_four(callback: CallbackQuery):
     await callback.answer('')
 
     await callback.message.answer_photo(
-        photo=piezoelectricity_photo,
+        photo=piezoelectricity1_photo,
         caption=piezo_electricity1_text,
         reply_markup=inline_kb_builder('piezo_electricity1_text')
     )
 
 @dp.callback_query(F.data == 'piezo_electricity1_text')
 async def process_stage_five(callback: CallbackQuery):
-    await callback.message.edit_caption(
-        caption=piezo_electricity2_text,
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=piezoelectricity2_photo,
+            caption=piezo_electricity2_text,
+        ),
         reply_markup=inline_kb_builder('piezo_electricity2_text')
     )
 
@@ -279,15 +288,18 @@ async def process_stage_four(callback: CallbackQuery):
     await callback.answer('')
 
     await callback.message.answer_photo(
-        photo=community_photo,
+        photo=community1_photo,
         caption=community1_text,
         reply_markup=inline_kb_builder('community1_text')
     )
 
 @dp.callback_query(F.data == 'community1_text')
 async def process_stage_five(callback: CallbackQuery):
-    await callback.message.edit_caption(
-        caption=community2_text,
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=community1_photo,
+            caption=community2_text,
+        ),
         reply_markup=inline_kb_builder('community2_text')
     )
 
