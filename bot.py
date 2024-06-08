@@ -2,6 +2,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command, StateFilter
+from aiogram.types import InlineKeyboardButton
 from aiogram.types import Message, CallbackQuery
 from keyboards import *
 from media import *
@@ -303,7 +304,114 @@ class Quiz(StatesGroup):
     fourth_question = State()
     fifth_question = State()
 
-############################################################33 ШАБЛОН ДЛЯ ДВУХ СЛАЙДОВ
+@dp.callback_query(F.data == 'community2_text', StateFilter(default_state))
+async def process_ask_to_start_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.message.answer_photo(
+        photo=start_quiz_photo,
+        caption=quiz_introduction_text,
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text='Да, давай!',
+                    callback_data='START_QUIZ_ACTION'
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text='Извини, давай в другой раз(',
+                    callback_data='DECLINE_QUIZ_ACTION'
+                )
+            ]
+        ])
+    )
+
+# отмена квиза
+@dp.callback_query(F.data == 'DECLINE_QUIZ_ACTION', StateFilter(default_state))
+async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.message.answer(
+        text=decline_quiz_text, 
+        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [
+                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+            ]
+        ])
+    )
+
+# начало квиза
+@dp.callback_query(F.data == 'START_QUIZ_ACTION', StateFilter(default_state))
+async def process_start_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.message.answer(
+        text=first_question,
+        reply_markup=quiz_question_keyboard(first_question)
+    )
+
+    await state.set_state(Quiz.name)
+    await state.update_data(name=callback.from_user.first_name)
+    await state.set_state(Quiz.first_question)
+
+@dp.callback_query(StateFilter(Quiz.first_question))
+async def process_second_question(callback: CallbackQuery, state: FSMContext):
+    await state.update_data(first_question=F.data)
+    await state.set_state(Quiz.second_question)
+
+    await callback.message.edit_text(
+        text=second_question,
+        reply_markup=quiz_question_keyboard(second_question)
+    )
+
+@dp.callback_query(StateFilter(Quiz.second_question))
+async def process_second_question(callback: CallbackQuery, state: FSMContext):
+    await state.update_data(second_question=F.data)
+    await state.set_state(Quiz.second_question)
+
+    await callback.message.edit_text(
+        text=third_question,
+        reply_markup=quiz_question_keyboard(third_question)
+    )
+
+@dp.callback_query(StateFilter(Quiz.third_question))
+async def process_second_question(callback: CallbackQuery, state: FSMContext):
+    await state.update_data(third_question=F.data)
+    await state.set_state(Quiz.fourth_question)
+
+    await callback.message.edit_text(
+        text=third_question,
+        reply_markup=quiz_question_keyboard(fourth_question)
+    )
+
+@dp.callback_query(StateFilter(Quiz.fourth_question))
+async def process_second_question(callback: CallbackQuery, state: FSMContext):
+    await state.update_data(fifth_question=F.data)
+    data = await state.get_data()
+
+    if ((str(data['first_question']) == '60') + (data['second_question'] == 'Хелфи') + (str(data['third_question']) == '5') +\
+          (data['fourth_question'] == 'применения пьезоэлектриков') + (str(data['fifth_question']) == '0')) >= 3:
+        await callback.message.answer_photo(
+            photo=winner_photo,
+            caption=quiz_winner_text,
+            reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [
+                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+            ]
+        ])
+        )
+    
+    else:
+        await callback.message.answer(
+            text=failed_quiz,
+            reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [
+                InlineKeyboardButton(text='Группа ТГ', url='tg://biomed_global')
+            ]
+        ])
+        )
+
+    # await callback.message.edit_text(
+    #     text=third_question,
+    #     reply_markup=quiz_question_keyboard(third_question)
+    # )
+
+############################################################ ШАБЛОН ДЛЯ ДВУХ СЛАЙДОВ
 # @dp.callback_query(F.data == '')
 # async def process_stage_four(callback: CallbackQuery):
 #     await callback.answer('')
