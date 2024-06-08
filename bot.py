@@ -221,9 +221,9 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
 async def process_stage_one(callback: CallbackQuery):
     await callback.message.edit_media(
         media=InputMediaPhoto(
-            media=hello2_photo
+            media=hello2_photo,
+            caption=hello2_text,
         ),
-        caption=hello2_text,
         reply_markup=inline_kb_builder(
             'hello2_text'
         )
