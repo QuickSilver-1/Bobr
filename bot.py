@@ -8,6 +8,7 @@ from media import *
 from config import config_1
 from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
+from re import match
 
 
 dp = Dispatcher()
@@ -21,16 +22,14 @@ class Form(StatesGroup):
 
 class Register(StatesGroup):
     fio = State()
-    email = State()
-    number = State()
-    username = State()
-    password = State()
+    age = State()
+    teeth = State()
 
-# @dp.message(F.photo)
-# async def photo_handler(message: Message) -> None:
-#     photo_data = message.photo[-1]
+@dp.message(F.photo)
+async def photo_handler(message: Message) -> None:
+    photo_data = message.photo[-1]
 
-#     await message.answer(f'{photo_data}')
+    await message.answer(f'{photo_data}')
 
 # @dp.message(F.video)
 # async def photo_handler(message: Message) -> None:
@@ -78,6 +77,7 @@ async def cmd_start(message: Message, state: FSMContext):
         
 @dp.callback_query(F.data == "Попробовать функции пользователя")
 async def admin_to_user(callback: CallbackQuery, state: FSMContext):
+    await callback.message.answer(text="Чтобы вернуться к админ-меню нажмите на кнопку снизу", reply_markup=back_reply_kb())
     await user_start(message=callback.message, state=state)
 
 async def user_start(message, state: FSMContext):
@@ -119,7 +119,6 @@ async def send_all(callback: CallbackQuery, state: FSMContext) -> None:
             await bot.send_message(chat_id=user[0], text=mes.text)
     else:
         for user in users:
-            print(mes)
             await bot.send_photo(chat_id=user[0], photo=mes.photo[-1].file_id, caption=mes.caption)
 
     await callback.message.answer("Сообщение отправлено пользователям", reply_markup=admin_kb())
@@ -133,11 +132,11 @@ async def cancel(callback: CallbackQuery, state: FSMContext):
     await state.clear()
     await bot.delete_message(chat_id=callback.message.chat.id, message_id = data.get("delete_msg"))
 
-@dp.callback_query(F.data == "Нету")
+@dp.callback_query(F.data == "Получить рекомендации")
 async def register(callback: CallbackQuery, state: FSMContext):
     await state.set_state(Register.fio)
     await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id)
-    await callback.message.answer(text="Вам нужно пройти небольшую регистрацию. Введите ФИО в формате 'Иванов Иван Иванович'")
+    await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
 
 @dp.message(Register.fio)
 async def reg_fio(message: Message, state: FSMContext) -> None:
@@ -147,49 +146,44 @@ async def reg_fio(message: Message, state: FSMContext) -> None:
         await message.answer(text="Неправильный формат данных, попробуйте снова")
         return None
     await state.update_data(first_name=first_name, last_name=last_name, second_name=second_name, username_tg=message.from_user.username, tg_id=message.from_user.id)
-    await state.set_state(Register.email)
-    await message.answer(text="Введите свою почту")
+    await state.set_state(Register.age)
+    await message.answer(text="Введите свой возраст")
 
-@dp.message(Register.email)
-async def reg_email(message: Message, state: FSMContext) -> None:
-    if match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', message.text) is None:
-        await message.answer(text="Неправильный формат данных, попробуйте снова")
-    else:
-        connection = connect(config_1.POSTGRES_URL)
-        cursor = connection.cursor()
-        cursor.execute(f'''SELECT COUNT(*) FROM "person" WHERE email = '{message.text}';''')
-        if cursor.fetchone()[0] > 0:
-            await message.answer(text="Пользователь с такой почтой уже есть", reply_markup=sign_in_kb())
-        else:
-            await state.update_data(email=message.text)
-            await state.set_state(Register.number)
-            await message.answer(text="Введите номер своего телефона")
+@dp.message(Register.age)
+async def reg_age(message: Message, state: FSMContext) -> None:
+    await state.update_data(age=message.text)
+    await message.answer(text="У вас чувствительные зубы?", reply_markup=teeth_kb())
 
-@dp.message(Register.number)
-async def reg_number(message: Message, state: FSMContext) -> None:
-    if match("^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$", message.text) is None:
-        await message.answer(text="Неправильный формат данных, попробуйте снова")
-    else:
-        await state.update_data(number=message.text)
-        await state.set_state(Register.username)
-        await message.answer(text="Придумайте себе имя пользователя\nОно должно состоять из символов латинского алфавита, цифр, а также символов: _ $ ^ #\nДлина от 3 до 15 символов")
+@dp.callback_query(F.data == "Чувствительные")
+async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.update_data(teeth=True)
+    await callback.message.answer(text="У вас есть проблемы с деснами?", reply_markup=desna_kb())
 
-@dp.message(Register.username)
-async def reg_username(message: Message, state: FSMContext) -> None:
-    if match("^[a-zA-Z0-9_$^#]+$", message.text) is None or len(message.text) < 3 or len(message.text) > 15:
-        await message.answer(text="Неправильный формат данных, попробуйте снова")
-    else:
-        await state.update_data(username=message.text)
-        await state.set_state(Register.password)
-        await message.answer(text="Придумайте себе пароль\nОно должно состоять из символов латинского алфавита, цифр, а также символов: _ $ ^ #\nДлина от 3 до 30 символов")
+@dp.callback_query(F.data == "Обычные")
+async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.update_data(teeth=False)
+    await callback.message.answer(text="У вас есть проблемы с деснами?", reply_markup=desna_kb())
 
-@dp.message(Register.password)
-async def reg_password(message: Message, state: FSMContext) -> None:
-    if match("^[a-zA-Z0-9_$^#]+$", message.text) is None or len(message.text) < 3 or len(message.text) > 30:
-        await message.answer(text="Неправильный формат данных, попробуйте снова")
-    else:
-        await state.update_data(password=message.text)
-        await message.answer(text="Запомните пароль. Далнейший вход в систему будет осуществлять через него", reply_markup=password_kb())
+@dp.callback_query(F.data == "Проблемные")
+async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    data = await state.get_data()
+    if data.get("teeth"):
+        await callback.message.answer_photo(caption=recomend_text, photo=black_medium_photo)
+
+@dp.callback_query(F.data == "Хорошие")
+async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await state.update_data(desna="нет")
+    
+
+@dp.message(F.text == "Вернуться")
+async def back_to_admin(message: Message):
+    connection = connect(config_1.POSTGRES_URL)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT tg_id FROM "admin"''')
+    admins = cursor.fetchall()
+    connection.close()
+    if str(message.from_user.id) in [i[0] for i in admins]:
+        await message.answer(admin_text, reply_markup=admin_kb())
 
 @dp.callback_query(F.data == "Запомнил")
 async def reg_final(callback: CallbackQuery, state: FSMContext):

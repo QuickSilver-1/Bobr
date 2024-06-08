@@ -8,6 +8,9 @@ piezo_electricity1_text = "Текст про пьезо электриков 1"
 piezo_electricity2_text = "Текст про пьезо электриков 2"
 community1_text = "текст про молодежь 1"
 community2_text = "текст про молодежь 2"
+recomend_text = "Мы рекомендуем вам следуюющие продукты из линейки BIOMED\n"
+black_medium_text = "Зубная щетка Biomed Black Medium\nЩетина с угольным напылением эффективно удаляет зубной налет, а закругленные кончики щетинок не травмируют десны"
+gum_health_text = "Зубная паста Gum Health\nЗдоровые десныНатуральные эфирные масла шалфея, эвкалипта, розмарина и кедра обеспечивают антиоксидантное действие и радуют восхитительным природным ароматом"
 
 lab1_text = 'Текст для фотки из лаборатории'
 # ПОМЕНЯТЬ ФОТОГРАФИИ!!!!!!!!!!!!!!!
@@ -16,6 +19,8 @@ egypt_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphSt
 chemicals_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
 piezoelectricity_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA"
 community_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
+black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ"
+
 
 admin_text = "В этом меню вы можете настроить рассылку для пользователей"
 

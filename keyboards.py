@@ -34,32 +34,33 @@ def are_you_sure():
     builder.adjust(1)
     return builder.as_markup()
 
-def skip_page(page):
+def teeth_kb():
     builder = InlineKeyboardBuilder()
-
     builder.button(
-        text=">>>", callback_data=page
+        text="Да", callback_data="Чувствительные"
     )
-
+    builder.button(
+        text="Нет", callback_data="Обычные"
+    )
     builder.adjust(1)
     return builder.as_markup()
 
-def next_page(page):
+def desna_kb():
     builder = InlineKeyboardBuilder()
-
     builder.button(
-        text="Дальше", callback_data=page
+        text="Да", callback_data="Проблемные"
     )
-
+    builder.button(
+        text="Нет", callback_data="Хорошие"
+    )
     builder.adjust(1)
     return builder.as_markup()
 
-def reply_kb_builder(buttons: list) -> ReplyKeyboardMarkup:
+def back_reply_kb():
     builder = ReplyKeyboardBuilder()
-    for button in buttons:
-        builder.button(
-            text=button,
-        )
+    builder.button(
+        text="Вернуться",
+    )
 
     builder.adjust(1)
     return builder.as_markup(resize_keyboard=True)
