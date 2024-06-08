@@ -9,7 +9,7 @@ from media import *
 from config import config_1
 from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
-from re import match
+from asyncio import sleep
 
 dp = Dispatcher()
 bot = Bot(token=config_1.TOKEN)
@@ -85,7 +85,7 @@ async def user_start(message):
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
     await create_user(tg_id, first_name, last_name)
-    await message.answer_photo(photo=hello1_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
+    await message.answer_photo(photo=hello1_photo, caption=hello1_text.format(name=message.from_user.id), reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):
@@ -167,14 +167,20 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
+        sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
+        sleep(1)
         await callback.message.answer_photo(photo=gum_health_photo, caption=gum_health_text)
+        sleep(1)
         await callback.message.answer_photo(photo=well_gum_photo, caption=well_gum_text)
 
     else:
         await callback.message.answer(text=recomend_text)
+        sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
+        sleep(1)
         await callback.message.answer_photo(photo=superwhite_photo, caption=superwhite_text)
+        sleep(1)
         await callback.message.answer_photo(photo=superwhiteop_photo, caption=superwhiteop_text)
 
     await reg_final(callback=callback, state=state)
@@ -184,34 +190,31 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
+        sleep(1)
         await callback.message.answer_photo(photo=silver_medium_photo, caption=silver_medium_text)
+        sleep(1)
         await callback.message.answer_photo(photo=white_complex_photo, caption=white_complex_text)
+        sleep(1)
         await callback.message.answer_photo(photo=sensetive_photo, caption=sensetive_text)
 
     else:
         await callback.message.answer(text=recomend_text)
+        sleep(1)
         await callback.message.answer_photo(photo=mineral_hard_photo, caption=mineral_hard_text)
+        sleep(1)
         await callback.message.answer_photo(photo=calcimax_photo, caption=calcimax_text)
+        sleep(1)
         await callback.message.answer_photo(photo=vitafresh_photo, caption=vitafresh_text)
 
     await reg_final(callback=callback, state=state)
     
 async def reg_final(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
-    username_tg = data.get("username_tg")
-    first_name = data.get("first_name")
-    last_name = data.get("last_name")
-    second_name = data.get("second_name")
-    email  = data.get("email")
-    tg_id = data.get("tg_id")
-    number = data.get("number")
-    username = data.get("username")
-    password = data.get("password")
-    password = config_1.crypt.encrypt(password)
+    age = data["age"]
+    tg_id = callback.from_user.id
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
-    cursor.execute(f'''INSERT INTO "person" (username_tg, first_name, last_name, second_name, email, number, tg_id, username, password)
-                   VALUES ('{username_tg}', '{first_name}', '{last_name}', '{second_name}', '{email}', '{number}', '{tg_id}', '{username}', '{password.decode()}');''')
+    cursor.execute(f'''INSERT INTO "users" (age) VALUES ({age}) WHERE tg_id = '{tg_id}';''')
     connection.commit()
     await callback.message.answer(text="Регистрация успешно выполнена")
     await state.clear()
