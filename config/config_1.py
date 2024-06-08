@@ -4,6 +4,6 @@ TOKEN = "7166162112:AAE7cxN35qhKAlQGnhS6SlB62bDfGpS8wfo"
 ip = '45.81.226.118'
 PGUSER = 'roman'
 PGPASSWORD = '1234'
-DATABASE = 'sofiasomova'
+DATABASE = 'bobr'
 
 POSTGRES_URL = f'postgresql://{PGUSER}:{PGPASSWORD}@{ip}/{DATABASE}'

@@ -5,3 +5,5 @@ egypt2_text = "Эти средства использовались еще со 
 
 hello_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
 egypt_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA"
+
+admin_text = "В этом меню вы можете настроить рассылку для пользователей"
