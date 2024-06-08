@@ -336,7 +336,7 @@ async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
 async def process_start_quiz(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(
         text=first_question,
-        reply_markup=quiz_question_keyboard(first_question)
+        reply_markup=quiz_question_keyboard('first_question')
     )
 
     await state.set_state(Quiz.name)
@@ -350,7 +350,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
     await callback.message.edit_text(
         text=second_question,
-        reply_markup=quiz_question_keyboard(second_question)
+        reply_markup=quiz_question_keyboard('second_question')
     )
 
 @dp.callback_query(StateFilter(Quiz.second_question))
@@ -360,7 +360,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
     await callback.message.edit_text(
         text=third_question,
-        reply_markup=quiz_question_keyboard(third_question)
+        reply_markup=quiz_question_keyboard('third_question')
     )
 
 @dp.callback_query(StateFilter(Quiz.third_question))
@@ -370,7 +370,7 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
     await callback.message.edit_text(
         text=third_question,
-        reply_markup=quiz_question_keyboard(fourth_question)
+        reply_markup=quiz_question_keyboard('fourth_question')
     )
 
 @dp.callback_query(StateFilter(Quiz.fourth_question))
