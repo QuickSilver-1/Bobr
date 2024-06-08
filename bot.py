@@ -6,8 +6,8 @@ from aiogram.types import Message, CallbackQuery
 from keyboards import *
 from media import *
 from config import config_1
-from asyncpg import UniqueViolationError
 from psycopg2 import connect
+from psycopg2.errors import UniqueViolation
 
 
 dp = Dispatcher()
@@ -54,7 +54,7 @@ async def create_user(tg_id, first_name, last_name):
         cursor.execute(f'''INSERT INTO users (tg_id, first_name, last_name) VALUES ('{tg_id}', '{first_name}', '{last_name}')''')
         connection.commit()
         connection.close()
-    except UniqueViolationError:
+    except UniqueViolation:
         pass
 
 @dp.message(CommandStart())
