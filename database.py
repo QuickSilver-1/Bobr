@@ -4,7 +4,7 @@ from typing import List
 import datetime
 from aiogram import Dispatcher
 from config import config_1
-from sqlalchemy import Column, String, sql, Date, Integer, ForeignKey, TIMESTAMP
+from sqlalchemy import Column, String, sql, Integer
 from sqlalchemy.orm import relationship
 from asyncpg import UniqueViolationError
 from asyncio import get_event_loop
@@ -56,6 +56,7 @@ class Users(TimedBaseModel):
     tg_id = Column(String(100), primary_key=True)
     first_name = Column(String(30))
     last_name = Column(String(30))
+    age = Column(Integer())
 
     query: sql.select
 
