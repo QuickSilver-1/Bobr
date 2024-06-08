@@ -10,12 +10,12 @@ community1_text = "текст про молодежь 1"
 community2_text = "текст про молодежь 2"
 
 lab1_text = 'Текст для фотки из лаборатории'
-
+# ПОМЕНЯТЬ ФОТОГРАФИИ!!!!!!!!!!!!!!!
 hello_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
 egypt_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA"
-chemicals_photo = ""
-piezoelectricity_photo = ""
-community_photo = ""
+chemicals_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
+piezoelectricity_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA"
+community_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
 
 admin_text = "В этом меню вы можете настроить рассылку для пользователей"
 
