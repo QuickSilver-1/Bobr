@@ -74,13 +74,20 @@ async def cmd_start(message: Message, state: FSMContext):
     if str(message.from_user.id) in [i[0] for i in admins]:
         await message.answer(admin_text, reply_markup=admin_kb())
     else:
-        tg_id = str(message.from_user.id)
-        first_name = message.from_user.first_name
-        last_name = message.from_user.last_name
-        await create_user(tg_id, first_name, last_name)
-        delete_id = await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
-        await state.set_state(Delete.delete_msg_id)
-        await state.update_data(msg_id=delete_id.message_id)
+        await user_start(message=message, state=state)
+        
+@dp.callback_query(F.data == "Попробовать функции пользователя")
+async def admin_to_user(callback: CallbackQuery, state: FSMContext):
+    await user_start(message=callback.message, state=state)
+
+async def user_start(message, state: FSMContext):
+    tg_id = str(message.from_user.id)
+    first_name = message.from_user.first_name
+    last_name = message.from_user.last_name
+    await create_user(tg_id, first_name, last_name)
+    delete_id = await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
+    await state.set_state(Delete.delete_msg_id)
+    await state.update_data(msg_id=delete_id.message_id)
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):

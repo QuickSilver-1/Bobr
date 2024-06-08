@@ -16,6 +16,9 @@ def admin_kb():
     builder.button(
         text="Настроить рассылку", callback_data="Настроить рассылку"
     )
+    builder.button(
+        text="Попробовать функции пользователя", callback_data="Попробовать функции пользователя"
+    )
 
     builder.adjust(1)
     return builder.as_markup()
