@@ -21,6 +21,8 @@ egypt_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphSt
 chemicals_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace 
 piezoelectricity_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
 community_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace 
+black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ"
+gum_health_photo = "AgACAgIAAxkBAAIB22Zkvqunq1JGHHt6cVQhIk0YIEGpAAJI2jEbiMopSxQ4VxM8iAH5AQADAgADeQADNQQ"
 
 start_quiz_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
 winner_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace
@@ -34,8 +36,6 @@ fifth_question = '5. На сколько процентов повреждает
 
 quiz_winner_text = "Поздравляю, вы победили в квизе! Вот ваш промокод: TESTPROMO"
 failed_quiz = "К сожалению, вы не набрали нужного количества баллов. Но вы можете попробовать ещё раз."
-black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ"
-
 
 admin_text = "В этом меню вы можете настроить рассылку для пользователей"
 

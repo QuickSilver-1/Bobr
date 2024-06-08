@@ -65,7 +65,7 @@ async def create_user(tg_id, first_name, last_name):
         pass
 
 @dp.message(CommandStart())
-async def cmd_start(message: Message, state: FSMContext):
+async def cmd_start(message: Message):
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
     cursor.execute('''SELECT tg_id FROM "admin"''')
@@ -74,21 +74,19 @@ async def cmd_start(message: Message, state: FSMContext):
     if str(message.from_user.id) in [i[0] for i in admins]:
         await message.answer(admin_text, reply_markup=admin_kb())
     else:
-        await user_start(message=message, state=state)
+        await user_start(message=message)
         
 @dp.callback_query(F.data == "Попробовать функции пользователя")
 async def admin_to_user(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer(text="Чтобы вернуться к админ-меню нажмите на кнопку снизу", reply_markup=back_reply_kb())
     await user_start(message=callback.message, state=state)
 
-async def user_start(message, state: FSMContext):
+async def user_start(message):
     tg_id = str(message.from_user.id)
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
     await create_user(tg_id, first_name, last_name)
-    delete_id = await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
-    await state.set_state(Delete.delete_msg_id)
-    await state.update_data(msg_id=delete_id.message_id)
+    await message.answer_photo(photo=hello_photo, caption=hello1_text, reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):
@@ -169,7 +167,8 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
-        await callback.message.answer_photo(caption=recomend_text, photo=black_medium_photo)
+        await callback.message.answer(text=recomend_text)
+        await callback.message.answer_photo(photo=gum_health_photo, caption=gum_health_text)
 
 @dp.callback_query(F.data == "Хорошие")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
