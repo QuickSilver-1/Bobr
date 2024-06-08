@@ -176,7 +176,7 @@ async def process_stage_five(callback: CallbackQuery):
     )
 
 # новая паста с добавлением пьезоэлектриков
-@dp.callback_query(F.data == 'chemicals1_text')
+@dp.callback_query(F.data == 'chemicals2_text')
 async def process_stage_four(callback: CallbackQuery):
     await callback.answer('')
 
@@ -218,7 +218,7 @@ class Quiz(StatesGroup):
     third_question = State()
     fourth_question = State()
     fifth_question = State()
-    
+
 ############################################################33 ШАБЛОН ДЛЯ ДВУХ СЛАЙДОВ
 # @dp.callback_query(F.data == '')
 # async def process_stage_four(callback: CallbackQuery):
