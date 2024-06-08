@@ -15,13 +15,18 @@ black_medium_text = "Зубная щетка Biomed Black Medium\nЩетина �
 gum_health_text = "Зубная паста Gum Health\nЗдоровые десныНатуральные эфирные масла шалфея, эвкалипта, розмарина и кедра обеспечивают антиоксидантное действие и радуют восхитительным природным ароматом"
 
 lab1_text = 'Текст для фотки из лаборатории'
-# ПОМЕНЯТЬ ФОТОГРАФИИ!!!!!!!!!!!!!!!
-hello_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA"
-egypt_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA"
-chemicals_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace 
-piezoelectricity_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
-community_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace 
-black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ"
+
+hello1_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ"
+hello2_photo = "AgACAgIAAxkBAAICWmZkzSHwc0rMbdHkXP_bjgRT0-GmAAIQ1zEbGUUpS1FeXK3__rrWAQADAgADeQADNQQ"
+egypt1_photo = "AgACAgIAAxkBAAICXmZkzZPJWXk-9AfPPg12uG67p6SQAAL34DEbooIZS8i6jRqYUrU4AQADAgADeQADNQQ"
+egypt2_photo = "AgACAgIAAxkBAAICXmZkzZPJWXk-9AfPPg12uG67p6SQAAL34DEbooIZS8i6jRqYUrU4AQADAgADeQADNQQ" #ПОМЕНЯТЬ
+chemicals1_photo = "AgACAgIAAxkBAAICYGZkzbWGd7mTTgMQk2dYZuxjp825AAJM4DEbooIhSzCLBpqoTHnsAQADAgADeQADNQQ"
+chemicals2_photo = "AgACAgIAAxkBAAICYmZkzdScAAE52TLl-03rwUwWBOuY6wAC7t4xGxlFIUvl_TTshRvrugEAAwIAA3kAAzUE"
+piezoelectricity1_photo = "AgACAgIAAxkBAAICZGZkzgVRe0sEV2YqVh4Ruv1Y2B1UAAL_1zEbjHIgS-MfJwMtlbQ2AQADAgADeQADNQQ"
+piezoelectricity2_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #ПОМЕНЯТЬ
+community1_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
+community2_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
+black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ" 
 gum_health_photo = "AgACAgIAAxkBAAIB22Zkvqunq1JGHHt6cVQhIk0YIEGpAAJI2jEbiMopSxQ4VxM8iAH5AQADAgADeQADNQQ"
 
 start_quiz_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 

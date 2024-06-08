@@ -2,7 +2,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup, default_state
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import CommandStart, Command, StateFilter
-from aiogram.types import InlineKeyboardButton
+from aiogram.types import InlineKeyboardButton, InputMediaPhoto
 from aiogram.types import Message, CallbackQuery
 from keyboards import *
 from media import *
@@ -208,7 +208,10 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
-    await callback.message.edit_caption(
+    await callback.message.edit_media(
+        media=InputMediaPhoto(
+            media=hello2_photo
+        ),
         caption=hello2_text,
         reply_markup=inline_kb_builder(
             'hello2_text'
@@ -220,7 +223,7 @@ async def process_stage_two(callback: Message):
     await callback.answer('')
 
     await callback.message.answer_photo(
-            photo=egypt_photo,
+            photo=egypt1_photo,
             caption=egypt1_text,
             reply_markup=inline_kb_builder('egypt1_text')
         )
