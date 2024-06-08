@@ -29,11 +29,11 @@ lab1_text = 'Текст для фотки из лаборатории'
 hello1_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ"
 hello2_photo = "AgACAgIAAxkBAAICWmZkzSHwc0rMbdHkXP_bjgRT0-GmAAIQ1zEbGUUpS1FeXK3__rrWAQADAgADeQADNQQ"
 egypt1_photo = "AgACAgIAAxkBAAICXmZkzZPJWXk-9AfPPg12uG67p6SQAAL34DEbooIZS8i6jRqYUrU4AQADAgADeQADNQQ"
-egypt2_photo = "AgACAgIAAxkBAAICXmZkzZPJWXk-9AfPPg12uG67p6SQAAL34DEbooIZS8i6jRqYUrU4AQADAgADeQADNQQ" #ПОМЕНЯТЬ
+egypt2_photo = "AgACAgIAAxkBAAICpGZk5aDoQ7ceM4LIswABjvJ5LtZA-wACGdcxGxlFKUsmKxfJ67ZS-AEAAwIAA3kAAzUE"
 chemicals1_photo = "AgACAgIAAxkBAAICYGZkzbWGd7mTTgMQk2dYZuxjp825AAJM4DEbooIhSzCLBpqoTHnsAQADAgADeQADNQQ"
 chemicals2_photo = "AgACAgIAAxkBAAICYmZkzdScAAE52TLl-03rwUwWBOuY6wAC7t4xGxlFIUvl_TTshRvrugEAAwIAA3kAAzUE"
 piezoelectricity1_photo = "AgACAgIAAxkBAAICZGZkzgVRe0sEV2YqVh4Ruv1Y2B1UAAL_1zEbjHIgS-MfJwMtlbQ2AQADAgADeQADNQQ"
-piezoelectricity2_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #ПОМЕНЯТЬ
+piezoelectricity2_photo = "AgACAgIAAxkBAAIComZk5X27uaEycLQGPXEc-jqfAuiZAAI_1zEbGUUpS0e2rh8xAwJkAQADAgADeQADNQQ"
 community1_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
 community2_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
 black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ" 
@@ -55,7 +55,7 @@ winner_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0g
 first_question = '1. В скольких странах biomed продают свою продукцию?'
 second_question = '2. Как зовут маскота бренда biomed, который рассказывал тебе о новом продукте?'
 third_question = '3. Сколько видов отбеливания на данный момент существует видов отбеливания?'
-fourth_question = '4. В лаборатории инноваций biomed был придуман способ отбеливания с помощью...'
+fourth_question = '4. В лаборатории инноваций biomed был придуман способ отбеливания с помощью применения...'
 fifth_question = '5. На сколько процентов повреждается эмаль при использовании пасты с новым отбеливанием?'
 
 quiz_winner_text = "Поздравляю, вы победили в квизе! Вот ваш промокод: TESTPROMO"
@@ -86,6 +86,6 @@ questions = {
     'first_question': [32, 60, 52],
     'second_question': ['Хелфи', 'Бобрик', 'Биотик'],
     'third_question': [3, 8, 5],
-    'fourth_question': ['применения пьезоэлектриков', 'применения диоритовой породы', 'применения алоэ вера'],
+    'fourth_question': ['пьезоэлектриков', 'диоритовой породы', 'алоэ вера'],
     'fifth_question': [4, 16, 0],
 }

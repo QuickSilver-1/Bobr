@@ -327,6 +327,8 @@ class Quiz(StatesGroup):
 
 @dp.callback_query(F.data == 'community2_text', StateFilter(default_state))
 async def process_ask_to_start_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.answer('')
+
     await callback.message.answer_photo(
         photo=start_quiz_photo,
         caption=quiz_introduction_text,
@@ -370,11 +372,14 @@ async def process_start_quiz(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(Quiz.name)
     await state.update_data(name=callback.from_user.first_name)
+    await state.update_data(count=0)
     await state.set_state(Quiz.first_question)
 
 @dp.callback_query(StateFilter(Quiz.first_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
-    await state.update_data(first_question=F.data)
+    if callback.data == '60':
+        counter = await state.get_data()
+        await state.update_data(count=counter['count'] + 1)
     await state.set_state(Quiz.second_question)
 
     await callback.message.edit_text(
@@ -384,7 +389,9 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(StateFilter(Quiz.second_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
-    await state.update_data(second_question=F.data)
+    if callback.data == 'Хелфи':
+        counter = await state.get_data()
+        await state.update_data(count=counter['count'] + 1)
     await state.set_state(Quiz.third_question)
 
     await callback.message.edit_text(
@@ -394,7 +401,9 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(StateFilter(Quiz.third_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
-    await state.update_data(third_question=F.data)
+    if callback.data == '5':
+        counter = await state.get_data()
+        await state.update_data(count=counter['count'] + 1)
     await state.set_state(Quiz.fourth_question)
 
     await callback.message.edit_text(
@@ -404,7 +413,9 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(StateFilter(Quiz.fourth_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
-    await state.update_data(fourth_question=F.data)
+    if callback.data == 'пьезоэлектриков':
+        counter = await state.get_data()
+        await state.update_data(count=counter['count'] + 1)
     await state.set_state(Quiz.fifth_question)
 
     await callback.message.edit_text(
@@ -414,19 +425,20 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(StateFilter(Quiz.fifth_question))
 async def process_second_question(callback: CallbackQuery, state: FSMContext):
-    await state.update_data(fifth_question=F.data)
+    if callback.data == '0':
+        counter = await state.get_data()
+        await state.update_data(count=counter['count'] + 1)
     data = await state.get_data()
-    print(data)
     await state.clear()
 
-    if ((str(data['first_question']) == '60') + (data['second_question'] == 'Хелфи') + (str(data['third_question']) == '5') + (data['fourth_question'] == 'применения пьезоэлектриков') + (str(data['fifth_question']) == '0')) >= 3:
+    if data['count'] >= 3:
         await callback.message.answer_photo(
             photo=winner_photo,
             caption=quiz_winner_text,
             reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
-            ]
+                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
+            ],
         ])
         )
     
@@ -435,30 +447,10 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
             text=failed_quiz,
             reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
+                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
+            ],
+            [
+                InlineKeyboardButton(text='Попробовать ещё раз', callback_data='START_QUIZ_ACTION')
             ]
         ])
         )
-
-    # await callback.message.edit_text(
-    #     text=third_question,
-    #     reply_markup=quiz_question_keyboard(third_question)
-    # )
-
-############################################################ ШАБЛОН ДЛЯ ДВУХ СЛАЙДОВ
-# @dp.callback_query(F.data == '')
-# async def process_stage_four(callback: CallbackQuery):
-#     await callback.answer('')
-
-#     await callback.message.answer_photo(
-#         photo=chemicals_photo,
-#         caption=,
-#         reply_markup=inline_kb_builder('')
-#     )
-
-# @dp.callback_query(F.data == '')
-# async def process_stage_five(callback: CallbackQuery):
-#     await callback.message.edit_caption(
-#         caption=,
-#         reply_markup=inline_kb_builder('')
-#     )
