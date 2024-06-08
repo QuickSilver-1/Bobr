@@ -13,6 +13,16 @@ decline_quiz_text = "Текст который отправляется посл
 recomend_text = "Мы рекомендуем вам следуюющие продукты из линейки BIOMED\n"
 black_medium_text = "Зубная щетка Biomed Black Medium\nЩетина с угольным напылением эффективно удаляет зубной налет, а закругленные кончики щетинок не травмируют десны"
 gum_health_text = "Зубная паста Gum Health\nЗдоровые десныНатуральные эфирные масла шалфея, эвкалипта, розмарина и кедра обеспечивают антиоксидантное действие и радуют восхитительным природным ароматом"
+well_gum_text = "Ополаскиватель Well Gum\nСнимает воспаление десен Эфирные масла эвкалипта, аниса, кедра, гвоздики и розмарина защищают от инфекций и кровоточивости"
+superwhite_text = "Зубная паста Superwhite\nБережно полирует эмаль, экстракт ананаса, содержащий бромелаин, очищает эмаль от зубного налета"
+superwhiteop_text = "Ополаскиватель Superwhite\nЗащищает от бактерий, ферментированный экстракт кокоса обладает антибактериальным эффектом"
+silver_medium_text = "Зубная щетка Silver Mefium\nУтонченная форма щетинок очищает места, где наиболее часто образуется кариес: межзубные промежутки, углубления жевательных поверхностей, придесневые участки. Не травмирует десны"
+white_complex_text = "Зубная паста White Complex\n1Отбеливает зубы до 1 тона. Эффект достигается через месяц за счет комбинации бамбукового, древесного и активированного угля"
+sensetive_text = "Ополаскивтель Sensetive\nОбладает реминерализирующим действием. Экстракт косточки винограда борется с кариесом и свободными радикалами"
+mineral_hard_text = "Зубная щетка Mineral Hard\nЖесткая щетина с вулканическими минералами эффективно очищает зубной налет и не травмирует десны"
+calcimax_text = "Зубная паста Calcimax\nЭфирные масла тимьяна освежают дыхание и заряжают бодростью на целый день"
+vitafresh_text = "Ополаскиватель Vitafresh\nОбеспечивает свежее дыхание надолгол. Лактат кальция реминализирует эмаль, а ментол освежает дыхание"
+
 
 lab1_text = 'Текст для фотки из лаборатории'
 
@@ -27,7 +37,16 @@ piezoelectricity2_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuig
 community1_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
 community2_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #ПОМЕНЯТЬ
 black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ" 
-gum_health_photo = "AgACAgIAAxkBAAIB22Zkvqunq1JGHHt6cVQhIk0YIEGpAAJI2jEbiMopSxQ4VxM8iAH5AQADAgADeQADNQQ"
+gum_health_photo = "AgACAgIAAxkBAAIB72ZkwdblY80xxK-BMyewWOImsD23AAJd2jEbiMopSztyUsnWM-lDAQADAgADeQADNQQ"
+well_gum_photo = "AgACAgIAAxkBAAIB22Zkvqunq1JGHHt6cVQhIk0YIEGpAAJI2jEbiMopSxQ4VxM8iAH5AQADAgADeQADNQQ"
+superwhite_photo = "AgACAgIAAxkBAAICEmZkxLducXfnO2Q5lSJTJVjFrbkIAAJh2jEbiMopSw__cLaO21pRAQADAgADeQADNQQ"
+superwhiteop_photo = "AgACAgIAAxkBAAICIGZkxV4GMqiNeRq0tZtNxZD_hsmYAAJj2jEbiMopSxrMMQqnZzB-AQADAgADeQADNQQ"
+silver_medium_photo = "AgACAgIAAxkBAAICPWZkyZGCXxHDeSLccJJRFS9vGPwaAAJ72jEbiMopS2BthsoFLqmWAQADAgADeQADNQQ"
+white_complex_photo = "AgACAgIAAxkBAAICP2ZkyhnFb99JkXKdSeqQsxyswQ3yAAJ-2jEbiMopSwGxUHOa0OlkAQADAgADeQADNQQ"
+sensetive_photo = "AgACAgIAAxkBAAICSmZkysK3TnxidYiIT8ExQ_dX3T53AAJ_2jEbiMopS86uk7Y3uvvgAQADAgADeQADNQQ"
+mineral_hard_photo = "AgACAgIAAxkBAAICVGZky7-p47vnff8NLgUSk02nOEb_AAKC2jEbiMopS04Ul-HOkau5AQADAgADeAADNQQ"
+calcimax_photo = "AgACAgIAAxkBAAICVmZkzL5gkfGORzlzpKibI692IilaAAKM2jEbiMopS7B4Aw5KVtaZAQADAgADeQADNQQ"
+vitafresh_photo = "AgACAgIAAxkBAAICXGZkzWOubGqRcvc0OTxhCghsCoYJAAKO2jEbiMopS3vjEb5OXU2fAQADAgADeQADNQQ"
 
 start_quiz_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
 winner_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace

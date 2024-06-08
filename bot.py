@@ -167,24 +167,35 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
+        await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
         await callback.message.answer_photo(photo=gum_health_photo, caption=gum_health_text)
+        await callback.message.answer_photo(photo=well_gum_photo, caption=well_gum_text)
+
+    else:
+        await callback.message.answer(text=recomend_text)
+        await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
+        await callback.message.answer_photo(photo=superwhite_photo, caption=superwhite_text)
+        await callback.message.answer_photo(photo=superwhiteop_photo, caption=superwhiteop_text)
+
+    await reg_final(callback=callback, state=state)
 
 @dp.callback_query(F.data == "Хорошие")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
-    await state.update_data(desna="нет")
+    data = await state.get_data()
+    if data.get("teeth"):
+        await callback.message.answer(text=recomend_text)
+        await callback.message.answer_photo(photo=silver_medium_photo, caption=silver_medium_text)
+        await callback.message.answer_photo(photo=white_complex_photo, caption=white_complex_text)
+        await callback.message.answer_photo(photo=sensetive_photo, caption=sensetive_text)
+
+    else:
+        await callback.message.answer(text=recomend_text)
+        await callback.message.answer_photo(photo=mineral_hard_photo, caption=mineral_hard_text)
+        await callback.message.answer_photo(photo=calcimax_photo, caption=calcimax_text)
+        await callback.message.answer_photo(photo=vitafresh_photo, caption=vitafresh_text)
+
+    await reg_final(callback=callback, state=state)
     
-
-@dp.message(F.text == "Вернуться")
-async def back_to_admin(message: Message):
-    connection = connect(config_1.POSTGRES_URL)
-    cursor = connection.cursor()
-    cursor.execute('''SELECT tg_id FROM "admin"''')
-    admins = cursor.fetchall()
-    connection.close()
-    if str(message.from_user.id) in [i[0] for i in admins]:
-        await message.answer(admin_text, reply_markup=admin_kb())
-
-@dp.callback_query(F.data == "Запомнил")
 async def reg_final(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     username_tg = data.get("username_tg")
