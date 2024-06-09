@@ -6,19 +6,19 @@ chemicals1_text = "В современных реалиях используют
 chemicals2_text = "Отбеливание зубов пероксидами может привести к повреждению эмали и повышенной чувствительности зубов. Кроме того, пероксиды могут вызывать раздражение десен и слизистой оболочки рта."
 piezo_electricity1_text = "Технология отбеливания зубов с использованием пьезоэлектриков состоит из двух этапов. Сначала при чистке зубов пьезоэлектрики в пасте или щетке генерируют ультразвуковые вибрации, разрушающие пигментные пятна."
 piezo_electricity2_text = "На втором этапе вода в слюне распадается на водород и кислород, которые окисляются и взаимодействуют с загрязнениями, эффективно отбеливая зубы без агрессивных химикатов. Этот метод безопасен для эмали и мягких тканей."
-community1_text = "текст про молодежь 1"
-community2_text = "текст про молодежь 2"
+community1_text = "Наша паста идеально подходит для людей 20-35 лет, у которых зубы часто более чувствительны."
+community2_text = "Она обеспечивает безопасное и комфортное отбеливание без риска повреждения эмали."
 quiz_introduction_text = "А теперь давай пройдём викторину, в конце которой ты сможешь получить промокод на скидку для покупки продукции SPLAT"
-decline_quiz_text = "Текст который отправляется после отмены квиза + можно сделать перегон трафика на канал"
+decline_quiz_text = "Ты всегда можешь попробовать ещё раз, а пока можешь зайти в главное меню"
 recomend_text = "Мы рекомендуем вам следуюющие продукты из линейки BIOMED\n"
 black_medium_text = "Зубная щетка Biomed Black Medium\nЩетина с угольным напылением эффективно удаляет зубной налет, а закругленные кончики щетинок не травмируют десны"
-gum_health_text = "Зубная паста Gum Health\nЗдоровые десныНатуральные эфирные масла шалфея, эвкалипта, розмарина и кедра обеспечивают антиоксидантное действие и радуют восхитительным природным ароматом"
+gum_health_text = "Зубная паста Gum Health\nЗдоровые десны Натуральные эфирные масла шалфея, эвкалипта, розмарина и кедра обеспечивают антиоксидантное действие и радуют восхитительным природным ароматом"
 well_gum_text = "Ополаскиватель Well Gum\nСнимает воспаление десен Эфирные масла эвкалипта, аниса, кедра, гвоздики и розмарина защищают от инфекций и кровоточивости"
 superwhite_text = "Зубная паста Superwhite\nБережно полирует эмаль, экстракт ананаса, содержащий бромелаин, очищает эмаль от зубного налета"
 superwhiteop_text = "Ополаскиватель Superwhite\nЗащищает от бактерий, ферментированный экстракт кокоса обладает антибактериальным эффектом"
 silver_medium_text = "Зубная щетка Silver Mefium\nУтонченная форма щетинок очищает места, где наиболее часто образуется кариес: межзубные промежутки, углубления жевательных поверхностей, придесневые участки. Не травмирует десны"
 white_complex_text = "Зубная паста White Complex\n1Отбеливает зубы до 1 тона. Эффект достигается через месяц за счет комбинации бамбукового, древесного и активированного угля"
-sensetive_text = "Ополаскивтель Sensetive\nОбладает реминерализирующим действием. Экстракт косточки винограда борется с кариесом и свободными радикалами"
+sensetive_text = "Ополаскиватель Sensetive\nОбладает реминерализирующим действием. Экстракт косточки винограда борется с кариесом и свободными радикалами"
 mineral_hard_text = "Зубная щетка Mineral Hard\nЖесткая щетина с вулканическими минералами эффективно очищает зубной налет и не травмирует десны"
 calcimax_text = "Зубная паста Calcimax\nЭфирные масла тимьяна освежают дыхание и заряжают бодростью на целый день"
 vitafresh_text = "Ополаскиватель Vitafresh\nОбеспечивает свежее дыхание надолгол. Лактат кальция реминализирует эмаль, а ментол освежает дыхание"
@@ -39,8 +39,8 @@ chemicals1_photo = "AgACAgIAAxkBAAICYGZkzbWGd7mTTgMQk2dYZuxjp825AAJM4DEbooIhSzCL
 chemicals2_photo = "AgACAgIAAxkBAAICYmZkzdScAAE52TLl-03rwUwWBOuY6wAC7t4xGxlFIUvl_TTshRvrugEAAwIAA3kAAzUE"
 piezoelectricity1_photo = "AgACAgIAAxkBAAICZGZkzgVRe0sEV2YqVh4Ruv1Y2B1UAAL_1zEbjHIgS-MfJwMtlbQ2AQADAgADeQADNQQ"
 piezoelectricity2_photo = "AgACAgIAAxkBAAICsWZk78JuNxZydCYTnTUG1qB4Gp2sAAI_1zEbGUUpS0e2rh8xAwJkAQADAgADeQADNQQ"
-community1_photo = "AgACAgIAAxkBAAICs2Zk79VU1UZA5B5rI5oyy6gaaVV7AAJL1zEbGUUpS8muHW00ciaXAQADAgADeQADNQQ"
-community2_photo = "AgACAgIAAxkBAAIC5mZk9Glwuehrqqd3qJ8yJ5KyQecHAAJM1zEbGUUpS5Kh2Eo9HA9DAQADAgADeQADNQQ"
+community1_photo = "AgACAgIAAxkBAAID1mZlHs2B3pif_ynuW42axkzX3y7FAAJL1zEbGUUpS8muHW00ciaXAQADAgADeQADNQQ"
+community2_photo = "AgACAgIAAxkBAAIDy2ZlHnKnRCFbOrza9xLKI2DLoIl1AAJM1zEbGUUpS5Kh2Eo9HA9DAQADAgADeQADNQQ"
 black_medium_photo = "AgACAgIAAxkBAAIB2GZkvBsf7syH92BtQ7JmzN4ZtWX6AAI82jEbiMopS6maekUl8hA8AQADAgADeQADNQQ" 
 gum_health_photo = "AgACAgIAAxkBAAIB72ZkwdblY80xxK-BMyewWOImsD23AAJd2jEbiMopSztyUsnWM-lDAQADAgADeQADNQQ"
 well_gum_photo = "AgACAgIAAxkBAAIB22Zkvqunq1JGHHt6cVQhIk0YIEGpAAJI2jEbiMopSxQ4VxM8iAH5AQADAgADeQADNQQ"
@@ -71,16 +71,16 @@ failed_quiz = "К сожалению, вы не набрали нужного к
 admin_text = "В этом меню вы можете настроить рассылку для пользователей"
 
 callback_keys = {
-    'hello1_text': 'текст кнопки приветствие 1',
-    'hello2_text': 'текст кнопки приветствие 2',
-    'egypt1_text': 'текст кнопки египет 1',
-    'egypt2_text': 'текст кнопки египет 2',
-    'chemicals1_text': 'текст кнопки химикаты 1',
-    'chemicals2_text': 'текст кнопки химикаты 2',
-    'piezo_electricity1_text': 'пьезо кнопка 1',
-    'piezo_electricity2_text': 'пьезо кнопка 2',
-    'community1_text': 'молодежь кнопка 1',
-    'community2_text': 'молодежь кнопка 2',
+    'hello1_text': 'Привет!',
+    'hello2_text': 'Ого, я заинтересован!',
+    'egypt1_text': 'Да, я тоже что-то слышал об этом.',
+    'egypt2_text': 'Так, хорошо.',
+    'chemicals1_text': 'Это же очень вредно...',
+    'chemicals2_text': 'Как же быть?',
+    'piezo_electricity1_text': 'Звучит круто',
+    'piezo_electricity2_text': 'То, что нужно!',
+    'community1_text': 'Как раз для меня',
+    'community2_text': 'Супер!',
 }
 
 button_labels = {
