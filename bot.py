@@ -377,13 +377,13 @@ async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
 async def process_start_quiz(callback: CallbackQuery, state: FSMContext):
     await callback.answer("")
 
-    await callback.message.answer(
+    delete_message = await callback.message.answer(
         text=first_question,
         reply_markup=quiz_question_keyboard('first_question')
     )
 
     await state.set_state(Quiz.name)
-    await state.update_data(name=callback.from_user.first_name)
+    await state.update_data(name=callback.from_user.first_name, delete_message=delete_message.message_id)
     await state.update_data(count=0)
     await state.set_state(Quiz.first_question)
 
@@ -443,7 +443,9 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     await state.clear()
 
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=data['delete_message'])
     if data['count'] >= 3:
+
         await callback.message.answer_photo(
             photo=winner_photo,
             caption=quiz_winner_text,
