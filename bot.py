@@ -11,6 +11,8 @@ from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
 from asyncio import sleep
 from random import choice
+from hmac import new
+from hashlib import sha256
 
 dp = Dispatcher()
 bot = Bot(token=config_1.TOKEN)
@@ -26,17 +28,12 @@ class Register(StatesGroup):
     age = State()
     teeth = State()
 
-@dp.message(F.photo)
-async def photo_handler(message: Message) -> None:
-    photo_data = message.photo[-1]
 
-    await message.answer(f'{photo_data}')
-
-async def create_user(tg_id, first_name, last_name):
+async def create_user(tg_id, first_name, last_name, username):
     try:
         connection = connect(config_1.POSTGRES_URL)
         cursor = connection.cursor()
-        cursor.execute(f'''INSERT INTO users (tg_id, first_name, last_name) VALUES ('{tg_id}', '{first_name}', '{last_name}')''')
+        cursor.execute(f'''INSERT INTO users (tg_id, first_name, last_name, username) VALUES ('{tg_id}', '{first_name}', '{last_name}', '{username}')''')
         connection.commit()
         connection.close()
     except UniqueViolation:
@@ -70,7 +67,8 @@ async def user_start(message):
     tg_id = str(message.from_user.id)
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
-    await create_user(tg_id, first_name, last_name)
+    username = message.from_user.username
+    await create_user(tg_id, first_name, last_name, username)
     await message.answer_photo(photo=hello1_photo, caption=hello1_text.format(name=message.from_user.first_name), reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
@@ -209,10 +207,11 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
 async def reg_final(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     age = data["age"]
+    age = new(config_1.SECRET_KEY, str(age).encode(), sha256).hexdigest()
     tg_id = callback.from_user.id
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
-    cursor.execute(f'''UPDATE "users" SET age = {age} WHERE tg_id = '{tg_id}';''')
+    cursor.execute(f'''UPDATE "users" SET age = '{age}' WHERE tg_id = '{tg_id}';''')
     connection.commit()
     await state.clear()
     await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
@@ -438,9 +437,9 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(F.data == "Главное меню")
 async def main_menu(callback: CallbackQuery):
-    await callback.answer("")
+    await callback.message.delete()
 
-    await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
+    # await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
 
 @dp.callback_query(F.data == "Маркетплейсы")
 async def marketplays(callback: CallbackQuery):
