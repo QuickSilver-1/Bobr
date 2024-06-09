@@ -55,14 +55,14 @@ vitafresh_photo = "AgACAgIAAxkBAAICXGZkzWOubGqRcvc0OTxhCghsCoYJAAKO2jEbiMopS3vjE
 fortune_photo = "AgACAgIAAxkBAAIDaGZlE5G678FPTzEAAZlLyNMm0jqYYQACCdsxG4jKKUsx3BVbF39jXgEAAwIAA3gAAzUE"
 
 
-start_quiz_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
-winner_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace
+start_quiz_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ"
+winner_photo = "AgACAgIAAxkBAAICpGZk5aDoQ7ceM4LIswABjvJ5LtZA-wACGdcxGxlFKUsmKxfJ67ZS-AEAAwIAA3kAAzUE"
 
 # quiz questions
-first_question = '1. В скольких странах biomed продают свою продукцию?'
-second_question = '2. Как зовут маскота бренда biomed, который рассказывал тебе о новом продукте?'
+first_question = '1. В скольких странах BIOMED продают свою продукцию?'
+second_question = '2. Как зовут маскота бренда BIOMED, который рассказывал тебе о новом продукте?'
 third_question = '3. Сколько видов отбеливания на данный момент существует видов отбеливания?'
-fourth_question = '4. В лаборатории инноваций biomed был придуман способ отбеливания с помощью применения...'
+fourth_question = '4. В лаборатории инноваций BIOMED был придуман способ отбеливания с помощью применения...'
 fifth_question = '5. На сколько процентов повреждается эмаль при использовании пасты с новым отбеливанием?'
 
 quiz_winner_text = "Поздравляю, ты победил в квизе! Вот твой промокод на скидку 80% в нашем магазине на OZON: PROMO80"
