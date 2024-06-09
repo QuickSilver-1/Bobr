@@ -77,6 +77,8 @@ async def cmd_start(message: Message):
         
 @dp.callback_query(F.data == "Попробовать функции пользователя")
 async def admin_to_user(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     await callback.message.answer(text="Чтобы вернуться к админ-меню нажмите на кнопку снизу", reply_markup=back_reply_kb())
     await user_start(message=callback.message)
 
@@ -89,6 +91,8 @@ async def user_start(message):
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     await state.set_state(Form.await_msg)
     await callback.message.answer("Введите текст, который вы хотите разослать или добавьте медиа-файлы")
 
@@ -102,6 +106,8 @@ async def send_msg(message: Message, state: FSMContext) -> None:
 
 @dp.callback_query(F.data == "Да")
 async def send_all(callback: CallbackQuery, state: FSMContext) -> None:
+    await callback.answer("")
+
     data = await state.get_data()
     mes = data.get("await_msg")
     connection = connect(config_1.POSTGRES_URL)
@@ -125,6 +131,8 @@ async def send_all(callback: CallbackQuery, state: FSMContext) -> None:
 
 @dp.callback_query(F.data == "Нет")
 async def cancel(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     data = await state.get_data()
     await callback.message.answer("Сообщение не отправлено", reply_markup=admin_kb())
     await state.clear()
@@ -156,16 +164,22 @@ async def reg_age(message: Message, state: FSMContext) -> None:
 
 @dp.callback_query(F.data == "Чувствительные")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await callback.answer("")
+
     await state.update_data(teeth=True)
     await callback.message.answer(text="У вас есть проблемы с деснами?", reply_markup=desna_kb())
 
 @dp.callback_query(F.data == "Обычные")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await callback.answer("")
+
     await state.update_data(teeth=False)
     await callback.message.answer(text="У вас есть проблемы с деснами?", reply_markup=desna_kb())
 
 @dp.callback_query(F.data == "Проблемные")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await callback.answer("")
+
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
@@ -189,6 +203,8 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
 
 @dp.callback_query(F.data == "Хорошие")
 async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
+    await callback.answer("")
+
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
