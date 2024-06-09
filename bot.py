@@ -355,7 +355,7 @@ async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
         text=decline_quiz_text, 
         reply_markup=InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text='Группа ТГ', url='https://t.me/biomed_global')
+                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
             ]
         ])
     )
