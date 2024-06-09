@@ -55,8 +55,8 @@ vitafresh_photo = "AgACAgIAAxkBAAICXGZkzWOubGqRcvc0OTxhCghsCoYJAAKO2jEbiMopS3vjE
 fortune_photo = "AgACAgIAAxkBAAIDaGZlE5G678FPTzEAAZlLyNMm0jqYYQACCdsxG4jKKUsx3BVbF39jXgEAAwIAA3gAAzUE"
 
 
-start_quiz_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ" #replace 
-winner_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ" #replace
+start_quiz_photo = "AgACAgIAAxkBAAICWGZkzN1broF5D94C0pOhvUiFA_szAAL_4zEbooIhS97k_Es6dZpoAQADAgADeQADNQQ"
+winner_photo = "AgACAgIAAxkBAAICpGZk5aDoQ7ceM4LIswABjvJ5LtZA-wACGdcxGxlFKUsmKxfJ67ZS-AEAAwIAA3kAAzUE"
 
 # quiz questions
 first_question = '1. В скольких странах BIOMED продают свою продукцию?'
