@@ -59,7 +59,7 @@ def desna_kb():
 def back_reply_kb():
     builder = ReplyKeyboardBuilder()
     builder.button(
-        text="Вернуться",
+        text="Вернуться в админ-панель",
     )
 
     builder.adjust(1)
@@ -85,3 +85,48 @@ def quiz_question_keyboard(question_number: str) -> InlineKeyboardMarkup:
         )
     
     return builder.as_markup(resize_keyboard=True)
+
+def main_kb(loose=False):
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Главное меню", callback_data="Главное меню"
+    )
+
+    if loose:
+        builder.button(
+            text='Попробовать ещё раз', callback_data='START_QUIZ_ACTION'
+        )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def main_menu_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Какая паста нужнам именно мне?", callback_data="Получить рекомендации"
+    )
+    builder.button(
+        text="А что тут?", url="https://t.me/BIOMED_Healthy_bot"
+    )
+    builder.button(
+        text="Всё для белоснежной улыбки", callback_data="Маркетплейсы"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+
+def market_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Ozon", url="https://www.ozon.ru/brand/biomed-18821767/"
+    )
+    builder.button(
+        text="Wildberries", url="https://www.wildberries.ru/brands/7757-biomed"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()

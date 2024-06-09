@@ -74,13 +74,18 @@ async def cmd_start(message: Message):
         await message.answer(admin_text, reply_markup=admin_kb())
     else:
         await user_start(message=message)
-        
+
 @dp.callback_query(F.data == "Попробовать функции пользователя")
 async def admin_to_user(callback: CallbackQuery, state: FSMContext):
     await callback.answer("")
 
     await callback.message.answer(text="Чтобы вернуться к админ-меню нажмите на кнопку снизу", reply_markup=back_reply_kb())
     await user_start(message=callback.message)
+
+        
+@dp.message(F.text == "Вернуться в админ-панель")
+async def back_to_home(message: Message):
+    await cmd_start(message)
 
 async def user_start(message):
     tg_id = str(message.from_user.id)
@@ -144,16 +149,12 @@ async def register(callback: CallbackQuery, state: FSMContext):
 
     await state.set_state(Register.fio)
     await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id)
-    await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
+    await callback.message.answer(text="Расскажите немного о себе. Введите своё имя")
 
 @dp.message(Register.fio)
 async def reg_fio(message: Message, state: FSMContext) -> None:
-    try:
-        last_name, first_name, second_name = message.text.split()
-    except:
-        await message.answer(text="Неправильный формат данных, попробуйте снова")
-        return None
-    await state.update_data(first_name=first_name, last_name=last_name, second_name=second_name, username_tg=message.from_user.username, tg_id=message.from_user.id)
+
+    await state.update_data(first_name=message.text, username_tg=message.from_user.username, tg_id=message.from_user.id)
     await state.set_state(Register.age)
     await message.answer(text="Введите свой возраст")
 
@@ -208,20 +209,20 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=silver_medium_photo, caption=silver_medium_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=white_complex_photo, caption=white_complex_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=sensetive_photo, caption=sensetive_text)
 
     else:
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=mineral_hard_photo, caption=mineral_hard_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=calcimax_photo, caption=calcimax_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=vitafresh_photo, caption=vitafresh_text)
 
     await reg_final(callback=callback, state=state)
@@ -232,11 +233,9 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
     tg_id = callback.from_user.id
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
-    cursor.execute(f'''UPDATE "users" SET age = 20 WHERE tg_id = '408789367';''')
+    cursor.execute(f'''UPDATE "users" SET age = {age} WHERE tg_id = '{tg_id}';''')
     connection.commit()
-    await callback.message.answer(text="Регистрация успешно выполнена")
     await state.clear()
-    await cmd_start(message=callback.message, reg=True)
 
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
@@ -371,14 +370,7 @@ async def process_ask_to_start_quiz(callback: CallbackQuery, state: FSMContext):
 async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
     await callback.answer("")
 
-    await callback.message.answer(
-        text=decline_quiz_text, 
-        reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-            [
-                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
-            ]
-        ])
-    )
+    await callback.message.answer(text=decline_quiz_text, reply_markup=main_kb())
 
 # начало квиза
 @dp.callback_query(F.data == 'START_QUIZ_ACTION', StateFilter(default_state))
@@ -455,22 +447,17 @@ async def process_second_question(callback: CallbackQuery, state: FSMContext):
         await callback.message.answer_photo(
             photo=winner_photo,
             caption=quiz_winner_text,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-            [
-                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
-            ],
-        ])
+            reply_markup=main_kb()
         )
     
+    
     else:
-        await callback.message.answer(
-            text=failed_quiz,
-            reply_markup=InlineKeyboardMarkup(inline_keyboard=[
-            [
-                InlineKeyboardButton(text='Главное меню', callback_data='Получить рекомендации')
-            ],
-            [
-                InlineKeyboardButton(text='Попробовать ещё раз', callback_data='START_QUIZ_ACTION')
-            ]
-        ])
-        )
+        await callback.message.answer(text=failed_quiz, reply_markup=main_kb(loose=True))
+
+@dp.callback_query(F.data == "Главное меню")
+async def main_menu(callback: CallbackQuery):
+    await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
+
+@dp.callback_query(F.data == "Маркетплейсы")
+async def marketplays(callback: CallbackQuery):
+    await callback.message.answer(text=market_text, reply_markup=market_kb())
