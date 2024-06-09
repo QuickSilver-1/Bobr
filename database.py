@@ -4,9 +4,7 @@ from typing import List
 import datetime
 from aiogram import Dispatcher
 from config import config_1
-from sqlalchemy import Column, String, sql, Integer
-from sqlalchemy.orm import relationship
-from asyncpg import UniqueViolationError
+from sqlalchemy import Column, String, sql
 from asyncio import get_event_loop
 
 
