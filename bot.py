@@ -85,7 +85,7 @@ async def user_start(message):
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
     await create_user(tg_id, first_name, last_name)
-    await message.answer_photo(photo=hello1_photo, caption=hello1_text.format(name=message.from_user.id), reply_markup=inline_kb_builder('hello1_text'))
+    await message.answer_photo(photo=hello1_photo, caption=hello1_text.format(name=message.from_user.first_name), reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
 async def get_message(callback: CallbackQuery, state: FSMContext):
@@ -214,7 +214,7 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
     tg_id = callback.from_user.id
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
-    cursor.execute(f'''INSERT INTO "users" (age) VALUES ({age}) WHERE tg_id = '{tg_id}';''')
+    cursor.execute(f'''UPDATE "users" SET age = 20 WHERE tg_id = '408789367';''')
     connection.commit()
     await callback.message.answer(text="Регистрация успешно выполнена")
     await state.clear()
