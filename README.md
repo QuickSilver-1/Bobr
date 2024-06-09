@@ -1,7 +1,8 @@
+# Bobr by Манагеры
+ 
 ![Static Badge](https://img.shields.io/badge/version-1.0.0-73c549?link=https%3A%2F%2Fgithub.com%2FQuickSilver-1%2FTZ%2Freleases%2F)
 ![Static Badge](https://img.shields.io/badge/team-%D0%9C%D0%B0%D0%BD%D0%B0%D0%B3%D0%B5%D1%80%D1%8B-blue)
 
-# Bobr by Манагеры
  <h2>Кейс</h2>
 Участникам предлагается создать различные виды digital-контента, который будет служить "мостиком" между наукой и массовой аудиторией под заданный бренд/продукт. Контент должен быть ориентирован на интернет-пользователей из РФ и стран СНГ в возрасте от 20 до 35 лет
 <h2>Требования к результатам</h2>
