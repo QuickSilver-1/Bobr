@@ -132,6 +132,8 @@ async def cancel(callback: CallbackQuery, state: FSMContext):
 
 @dp.callback_query(F.data == "Получить рекомендации")
 async def register(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     await state.set_state(Register.fio)
     await state.update_data(username=callback.message.from_user.username, tg_id=callback.message.from_user.id)
     await callback.message.answer(text="Расскажите немного о себе. Введите своё ФИО")
@@ -351,6 +353,8 @@ async def process_ask_to_start_quiz(callback: CallbackQuery, state: FSMContext):
 # отмена квиза
 @dp.callback_query(F.data == 'DECLINE_QUIZ_ACTION', StateFilter(default_state))
 async def process_decline_quiz(callback: CallbackQuery, state: FSMContext):
+    await callback.answer("")
+
     await callback.message.answer(
         text=decline_quiz_text, 
         reply_markup=InlineKeyboardMarkup(inline_keyboard=[
