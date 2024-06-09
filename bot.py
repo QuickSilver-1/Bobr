@@ -10,6 +10,7 @@ from config import config_1
 from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
 from asyncio import sleep
+from random import choice
 
 dp = Dispatcher()
 bot = Bot(token=config_1.TOKEN)
@@ -30,25 +31,6 @@ async def photo_handler(message: Message) -> None:
     photo_data = message.photo[-1]
 
     await message.answer(f'{photo_data}')
-
-# @dp.message(F.video)
-# async def photo_handler(message: Message) -> None:
-#     photo_data = message.video
-
-#     await message.answer(f'{photo_data}')
-
-# @dp.message(F.document)
-# async def photo_handler(message: Message) -> None:
-#     photo_data = message.document
-
-#     await message.answer(f'{photo_data}')
-
-# @dp.message(F.voice)
-# async def photo_handler(message: Message) -> None:
-#     photo_data = message.voice.file_id
-
-#     await message.answer(f'{photo_data}')
-
 
 async def create_user(tg_id, first_name, last_name):
     try:
@@ -233,6 +215,7 @@ async def reg_final(callback: CallbackQuery, state: FSMContext):
     cursor.execute(f'''UPDATE "users" SET age = {age} WHERE tg_id = '{tg_id}';''')
     connection.commit()
     await state.clear()
+    await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
 
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
@@ -464,3 +447,37 @@ async def marketplays(callback: CallbackQuery):
     await callback.answer("")
 
     await callback.message.answer(text=market_text, reply_markup=market_kb())
+
+@dp.callback_query(F.data == "Розыгрыш")
+async def fortune(callback: CallbackQuery):
+    await callback.message.answer_photo(photo=fortune_photo, caption=fortune_text, reply_markup=main_kb())
+    
+@dp.callback_query(F.data == "Рандом")
+async def random_admin(callback: CallbackQuery, state: FSMContext):
+    connection = connect(config_1.POSTGRES_URL)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT tg_id, username FROM "users";''')
+    username = choice(cursor.fetchall())
+    msg = await callback.message.answer(text=random_text.format(username=username[1]), reply_markup=random_kb())
+    await state.set_state(Delete.delete_msg_id)
+    await state.update_data(msg_id=msg.message_id, winner_id=username[0], username=username[1])
+
+@dp.callback_query(F.data == "Выбрать другого")
+async def fortune(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=data["msg_id"])
+    connection = connect(config_1.POSTGRES_URL)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT tg_id, username FROM "users";''')
+    username = choice(cursor.fetchall())
+    msg = await callback.message.answer(text=random_text.format(username=username[1]), reply_markup=random_kb())
+    await state.set_state(Delete.delete_msg_id)
+    await state.update_data(msg_id=msg.message_id, winner_id=username[0], username=username[1])
+    
+@dp.callback_query(F.data == "Победитель")
+async def fortune(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=data["msg_id"])
+    await callback.message.answer(text=f'Сообщение отправлено победителю @{data["username"]}', reply_markup=admin_kb())
+    await bot.send_photo(chat_id=data["winner_id"], photo=winner_photo, caption=winner_text)
+    await state.clear()

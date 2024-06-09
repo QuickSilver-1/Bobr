@@ -107,7 +107,7 @@ def main_menu_kb():
         text="Какая паста нужнам именно мне?", callback_data="Получить рекомендации"
     )
     builder.button(
-        text="А что тут?", url="https://t.me/BIOMED_Healthy_bot"
+        text="А что тут?", url="https://t.me/biomed_global"
     )
     builder.button(
         text="Всё для белоснежной улыбки", callback_data="Маркетплейсы"
