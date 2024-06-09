@@ -50,9 +50,6 @@ async def photo_handler(message: Message) -> None:
 #     await message.answer(f'{photo_data}')
 
 
-admins = ["1051818216"]
-
-
 async def create_user(tg_id, first_name, last_name):
     try:
         connection = connect(config_1.POSTGRES_URL)
@@ -184,20 +181,20 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=gum_health_photo, caption=gum_health_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=well_gum_photo, caption=well_gum_text)
 
     else:
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=superwhite_photo, caption=superwhite_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=superwhiteop_photo, caption=superwhiteop_text)
 
     await reg_final(callback=callback, state=state)
