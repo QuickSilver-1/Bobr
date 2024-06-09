@@ -10,6 +10,9 @@ from config import config_1
 from psycopg2 import connect
 from psycopg2.errors import UniqueViolation
 from asyncio import sleep
+from hmac import new
+from hashlib import sha256
+from random import choice
 
 dp = Dispatcher()
 bot = Bot(token=config_1.TOKEN)
@@ -53,11 +56,11 @@ async def photo_handler(message: Message) -> None:
 admins = ["1051818216"]
 
 
-async def create_user(tg_id, first_name, last_name):
+async def create_user(tg_id, first_name, last_name, username):
     try:
         connection = connect(config_1.POSTGRES_URL)
         cursor = connection.cursor()
-        cursor.execute(f'''INSERT INTO users (tg_id, first_name, last_name) VALUES ('{tg_id}', '{first_name}', '{last_name}')''')
+        cursor.execute(f'''INSERT INTO users (tg_id, first_name, last_name, username) VALUES ('{tg_id}', '{first_name}', '{last_name}', '{username}')''')
         connection.commit()
         connection.close()
     except UniqueViolation:
@@ -91,7 +94,8 @@ async def user_start(message):
     tg_id = str(message.from_user.id)
     first_name = message.from_user.first_name
     last_name = message.from_user.last_name
-    await create_user(tg_id, first_name, last_name)
+    username = message.from_user.username
+    await create_user(tg_id, first_name, last_name, username)
     await message.answer_photo(photo=hello1_photo, caption=hello1_text.format(name=message.from_user.first_name), reply_markup=inline_kb_builder('hello1_text'))
         
 @dp.callback_query(F.data == "Настроить рассылку")
@@ -184,20 +188,20 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
     data = await state.get_data()
     if data.get("teeth"):
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=gum_health_photo, caption=gum_health_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=well_gum_photo, caption=well_gum_text)
 
     else:
         await callback.message.answer(text=recomend_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=black_medium_photo, caption=black_medium_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=superwhite_photo, caption=superwhite_text)
-        sleep(1)
+        await sleep(1)
         await callback.message.answer_photo(photo=superwhiteop_photo, caption=superwhiteop_text)
 
     await reg_final(callback=callback, state=state)
@@ -230,12 +234,14 @@ async def reg_teeth(callback: CallbackQuery, state: FSMContext) -> None:
 async def reg_final(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     age = data["age"]
+    age = new(config_1.SECRET_KEY, str(age).encode(), sha256).hexdigest()
     tg_id = callback.from_user.id
     connection = connect(config_1.POSTGRES_URL)
     cursor = connection.cursor()
-    cursor.execute(f'''UPDATE "users" SET age = {age} WHERE tg_id = '{tg_id}';''')
+    cursor.execute(f'''UPDATE "users" SET age = '{age}' WHERE tg_id = '{tg_id}';''')
     connection.commit()
     await state.clear()
+    await callback.message.answer(text=main_text, reply_markup=main_menu_kb())
 
 @dp.callback_query(F.data == 'hello1_text')
 async def process_stage_one(callback: CallbackQuery):
@@ -463,3 +469,37 @@ async def main_menu(callback: CallbackQuery):
 @dp.callback_query(F.data == "Маркетплейсы")
 async def marketplays(callback: CallbackQuery):
     await callback.message.answer(text=market_text, reply_markup=market_kb())
+
+@dp.callback_query(F.data == "Розыгрыш")
+async def fortune(callback: CallbackQuery):
+    await callback.message.answer_photo(photo=fortune_photo, caption=fortune_text, reply_markup=main_kb())
+    
+@dp.callback_query(F.data == "Рандом")
+async def random_admin(callback: CallbackQuery, state: FSMContext):
+    connection = connect(config_1.POSTGRES_URL)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT tg_id, username FROM "users";''')
+    username = choice(cursor.fetchall())
+    msg = await callback.message.answer(text=random_text.format(username=username[1]), reply_markup=random_kb())
+    await state.set_state(Delete.delete_msg_id)
+    await state.update_data(msg_id=msg.message_id, winner_id=username[0], username=username[1])
+
+@dp.callback_query(F.data == "Выбрать другого")
+async def fortune(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=data["msg_id"])
+    connection = connect(config_1.POSTGRES_URL)
+    cursor = connection.cursor()
+    cursor.execute('''SELECT tg_id, username FROM "users";''')
+    username = choice(cursor.fetchall())
+    msg = await callback.message.answer(text=random_text.format(username=username[1]), reply_markup=random_kb())
+    await state.set_state(Delete.delete_msg_id)
+    await state.update_data(msg_id=msg.message_id, winner_id=username[0], username=username[1])
+    
+@dp.callback_query(F.data == "Победитель")
+async def fortune(callback: CallbackQuery, state: FSMContext):
+    data = await state.get_data()
+    await bot.delete_message(chat_id=callback.message.chat.id, message_id=data["msg_id"])
+    await callback.message.answer(text=f'Сообщение отправлено победителю @{data["username"]}', reply_markup=admin_kb())
+    await bot.send_photo(chat_id=data["winner_id"], photo=winner_photo, caption=winner_text)
+    await state.clear()

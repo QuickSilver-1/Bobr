@@ -54,9 +54,10 @@ class Users(TimedBaseModel):
     __tablename__ = 'users'
 
     tg_id = Column(String(100), primary_key=True)
+    username = Column(String(100))
     first_name = Column(String(30))
     last_name = Column(String(30))
-    age = Column(Integer())
+    age = Column(String(100))
 
     query: sql.select
 

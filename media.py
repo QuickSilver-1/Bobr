@@ -24,6 +24,9 @@ calcimax_text = "Зубная паста Calcimax\nЭфирные масла т�
 vitafresh_text = "Ополаскиватель Vitafresh\nОбеспечивает свежее дыхание надолгол. Лактат кальция реминализирует эмаль, а ментол освежает дыхание"
 main_text = "Между подписчиками этого бота еженедельно проходит розыгрыш на бесплатные наборы от BIOMED"
 market_text = "Переходи на страницы нашего магазина на маркетплейсах и покупай всё, что нужно для гигиены полости рта"
+fortune_text = "Каждую пятницу мы проводим розыгрыш призов между нашими подписчиками. Всё, что нужно сделать для участия - быть подписанным на этого бота и на наш канал https://t.me/biomed_global"
+random_text = "Победитель!!!\nПользователь: @{username}\nПользователь получит уведомление и будет ждать дальнейшей связи"
+winner_text = "УРА!!!УРА!!!УРА!!!\nСегодня ты победилтель нашего еженедельного розыгрыша призов. Скоро с тобой свяжутся наши администраторы и передадут промокод на беспатную продукцию BIOMED"
 
 
 lab1_text = 'Текст для фотки из лаборатории'
@@ -49,6 +52,8 @@ sensetive_photo = "AgACAgIAAxkBAAICSmZkysK3TnxidYiIT8ExQ_dX3T53AAJ_2jEbiMopS86uk
 mineral_hard_photo = "AgACAgIAAxkBAAICVGZky7-p47vnff8NLgUSk02nOEb_AAKC2jEbiMopS04Ul-HOkau5AQADAgADeAADNQQ"
 calcimax_photo = "AgACAgIAAxkBAAICVmZkzL5gkfGORzlzpKibI692IilaAAKM2jEbiMopS7B4Aw5KVtaZAQADAgADeQADNQQ"
 vitafresh_photo = "AgACAgIAAxkBAAICXGZkzWOubGqRcvc0OTxhCghsCoYJAAKO2jEbiMopS3vjEb5OXU2fAQADAgADeQADNQQ"
+fortune_photo = "AgACAgIAAxkBAAIDaGZlE5G678FPTzEAAZlLyNMm0jqYYQACCdsxG4jKKUsx3BVbF39jXgEAAwIAA3gAAzUE"
+
 
 start_quiz_photo = "AgACAgIAAxkBAANJZmOYzgcmVgkv2H2OxxviTrWbIqMAAvfgMRuighlLyLqNGphStTgBAAMCAAN5AAM1BA" #replace 
 winner_photo = "AgACAgIAAxkBAAMDZmOC56bKzxcKXD3MfhQn3zjhNFQAAr3WMRuIyiFLD_mkRW0gOYUBAAMCAAN4AAM1BA" #replace

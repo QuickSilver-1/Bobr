@@ -19,6 +19,9 @@ def admin_kb():
     builder.button(
         text="Попробовать функции пользователя", callback_data="Попробовать функции пользователя"
     )
+    builder.button(
+        text="Розыгрыш", callback_data="Рандом"
+    )
 
     builder.adjust(1)
     return builder.as_markup()
@@ -116,6 +119,9 @@ def main_menu_kb():
     builder.button(
         text="Всё для белоснежной улыбки", callback_data="Маркетплейсы"
     )
+    builder.button(
+        text="Еженедельный розыгрыш призов!", callback_data="Розыгрыш"
+    )
 
     builder.adjust(1)
     return builder.as_markup()
@@ -129,6 +135,22 @@ def market_kb():
     )
     builder.button(
         text="Wildberries", url="https://www.wildberries.ru/brands/7757-biomed"
+    )
+    builder.button(
+        text="Вернуться в главное меню", callback_data="Главное меню"
+    )
+
+    builder.adjust(1)
+    return builder.as_markup()
+
+def random_kb():
+    builder = InlineKeyboardBuilder()
+
+    builder.button(
+        text="Отправить уведомление пользвателю", callback_data="Победитель"
+    )
+    builder.button(
+        text="Выбрать другого", callback_data="Выбрать другого"
     )
 
     builder.adjust(1)
