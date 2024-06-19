@@ -1,11 +1,11 @@
-TOKEN = '${{ BOT_TOKEN }}'
+TOKEN = "7166162112:AAE7cxN35qhKAlQGnhS6SlB62bDfGpS8wfo"
 
 
-ip = '${{ IP_SERVER }}'
-PGUSER = '${{ PG_USER }}'
-PGPASSWORD = '${{ PG_PASSWORD }}'
-DATABASE = ' ${{ DATABASE }}'
+ip = '127.0.0.1'
+PGUSER = 'postgres'
+PGPASSWORD = '1234'
+DATABASE = 'bobr'
 
 POSTGRES_URL = f'postgresql://{PGUSER}:{PGPASSWORD}@{ip}/{DATABASE}'
 
-SECRET_KEY = b'${{ SECRET_KEY }}'
+SECRET_KEY = b'rHOPsLChNAHn_h4LyqfT6kHMUVcnWur1FPMVh3W1vj4='
